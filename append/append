@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ $# -lt 3 ]; then
+    echo "Usage: append DIRECTION file1 file2 ... dest"
+    echo "i.e.: append -left 01.png 02.png dest.png"
+    echo "DIRECTION = [-left|-right|-top|-bottom]"
+    exit
+fi
+
+DIRECTION=$1
+shift;
+ARGS=("$@")
+DEST=${ARGS[((${#ARGS[@]}-1))]}
+
+case "$DIRECTION" in
+    "-left")
+        FILES=`for item in "${ARGS[@]:0:((${#ARGS[@]}-1))}"; do
+          echo "$item";
+        done | tac`
+        OPTIONS='+append'
+        ;;
+    "-right")
+        OPTIONS='+append'
+        ;;
+    "-top")
+        FILES=`for item in "${ARGS[@]:0:((${#ARGS[@]}-1))}"; do
+          echo "$item";
+        done | tac`
+        OPTIONS='-append'
+        ;;
+    "-bottom")
+        OPTIONS='-append'
+        ;;
+esac
+
+convert $OPTIONS $FILES $DEST
