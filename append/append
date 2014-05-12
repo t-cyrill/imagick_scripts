@@ -15,7 +15,6 @@ DEST=${ARGS[((${#ARGS[@]}-1))]}
 case "$DIRECTION" in
     "-left")
         FILES=`echo "${ARGS[@]:0:((${#ARGS[@]}-1))}" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
-        echo $FILES;exit;
         OPTIONS='+append'
         ;;
     "-right")
