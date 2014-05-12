@@ -12,16 +12,18 @@ shift;
 ARGS=("$@")
 DEST=${ARGS[((${#ARGS[@]}-1))]}
 
+FILES="${ARGS[@]:0:((${#ARGS[@]}-1))}"
+
 case "$DIRECTION" in
     "-left")
-        FILES=`echo "${ARGS[@]:0:((${#ARGS[@]}-1))}" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
+        FILES=`echo "$FILES" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
         OPTIONS='+append'
         ;;
     "-right")
         OPTIONS='+append'
         ;;
     "-top")
-        FILES=`echo "${ARGS[@]:0:((${#ARGS[@]}-1))}" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
+        FILES=`echo "$FILES" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
         OPTIONS='-append'
         ;;
     "-bottom")
