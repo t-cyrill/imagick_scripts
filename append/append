@@ -14,18 +14,14 @@ DEST=${ARGS[((${#ARGS[@]}-1))]}
 
 case "$DIRECTION" in
     "-left")
-        FILES=`for item in "${ARGS[@]:0:((${#ARGS[@]}-1))}"; do
-          echo "$item";
-        done | tac`
+        FILES=`echo "${ARGS[@]:0:((${#ARGS[@]}-1))}" | perl -e '@a=split(/\s/, <>);print join(" ", reverse(@a));'`
         OPTIONS='+append'
         ;;
     "-right")
         OPTIONS='+append'
         ;;
     "-top")
-        FILES=`for item in "${ARGS[@]:0:((${#ARGS[@]}-1))}"; do
-          echo "$item";
-        done | tac`
+        FILES=`echo "${ARGS[@]:0:((${#ARGS[@]}-1))}" | perl -e '@a=split(/\s/, <>);print join(" ", reverse(@a));'`
         OPTIONS='-append'
         ;;
     "-bottom")
