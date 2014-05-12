@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# -lt 5 ]; then
+    echo "Usage: image_crop x y width height [dest] [pattern=*.png]"
+    echo "i.e.: image_crop 10 10 240 240 ./dest '\\*.png'"
+    exit
+fi
+
+X=$1
+Y=$2
+WIDTH=$3
+HEIGHT=$4
+
+DEST=${5:?dest}
+PATTERN=${6:?*.png}
+
+mkdir -p ${DEST}
+
+for FILE in `ls ${PATTERN}`
+do
+    convert -crop ${WIDTH}x${HEIGHT}+${X}+${Y} $FILE ${DEST}/${FILE}
+done
+
