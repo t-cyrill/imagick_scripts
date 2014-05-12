@@ -2,7 +2,7 @@
 
 if [ $# -lt 5 ]; then
     echo "Usage: image_crop x y width height [dest] [pattern=*.png]"
-    echo "i.e.: image_crop 10 10 240 240 ./dest '\\*.png'"
+    echo "i.e.: image_crop 10 10 240 240 ./dest '*.png'"
     exit
 fi
 
