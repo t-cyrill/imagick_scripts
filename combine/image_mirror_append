@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: image_mirror_append file dest"
+    echo "i.e.: image_mirror_append src.png dest.png"
+    exit
+fi
+
+SRC=$1
+DEST=$2
+
+tmpfile=$(mktemp $TMPDIR/tmp.XXXXXXXX)
+
+convert -flip $SRC $tmpfile
+convert -append $SRC $tmpfile $DEST

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: image_append files dest"
+    echo "i.e.: image_append '*.png' dest.png"
+    exit
+fi
+
+PATTERN=${1:?*.png}
+DEST=${2:?dest.png}
+
+convert +append $PATTERN $DEST
