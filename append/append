@@ -20,7 +20,7 @@ case "$DIRECTION" in
 esac
 
 case "$DIRECTION" in
-    "-left"|"-top") FILES=`echo "$FILES" | awk '{for(i=NF;i>0;i--) printf("%s ",$i);}' | sed -e 's/\s$//'`;;
+    "-left"|"-top") FILES=`echo "$FILES" | awk '{for(i=NF;i>0;i--) printf("%s ",$i);}' | xargs`;;
 esac
 
 convert $OPTIONS $FILES $DEST
