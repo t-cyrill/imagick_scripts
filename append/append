@@ -15,20 +15,12 @@ DEST=${ARGS[((${#ARGS[@]}-1))]}
 FILES="${ARGS[@]:0:((${#ARGS[@]}-1))}"
 
 case "$DIRECTION" in
-    "-left")
-        FILES=`echo "$FILES" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
-        OPTIONS='+append'
-        ;;
-    "-right")
-        OPTIONS='+append'
-        ;;
-    "-top")
-        FILES=`echo "$FILES" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`
-        OPTIONS='-append'
-        ;;
-    "-bottom")
-        OPTIONS='-append'
-        ;;
+    "-left"|"-right") OPTIONS='+append';;
+    "-top"|"-bottom") OPTIONS='-append';;
+esac
+
+case "$DIRECTION" in
+    "-left"|"-top") FILES=`echo "$FILES" | awk '{for (i=NF; i>0; i--) printf("%s ",$i);print ""}'`;;
 esac
 
 convert $OPTIONS $FILES $DEST
